@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+
+<style type="text/css">
+#main{
+background-color: #eee;
+width: 800px;
+position: absolute;
+left: 250px;
+
+}	
+
+
+
+
+</style>
+<body>
+<div  id="main">
+<h1 style="position: absolute;left: 250px;font-size: 50px; "  > <b> Data Form:</b>  </h1><br><br><br><br><br><br>
+
+
+
+
+<center>
+<form  id="contactForm" method="POST"   >
+	<input type="text" placeholder="enter ur first name " style="border-radius: 4px;border:4px solid #eee;width: 160px" name="fname" id="fname"><br><b>
+    <input type="text" placeholder="write ur last name" style="border-radius: 4px;border:4px solid #eee;width: 160px" name="lname" id="lname"><br><br>
+    <input type="email"  placeholder="enter ur email "  style="border-radius: 4px;border:4px solid #eee;width: 160px"   name="email"  id="email"  ><br><br>
+	<input type="text" id="country" placeholder="enter ur country" style="border-radius: 4px;border:4px solid #eee;width: 160px" name="country"><br><br>
+
+
+<div id="gender">
+<input type="radio" value="male"  name="gender"> MALE
+<input type="radio" value="female"  name="gender"> FEMALE
+</div>
+<br><br><br>
+
+
+<div style="background-color: #eee;width: 160px">Year of Study:
+&nbsp
+<select id="year">
+        <option value="2015">2015</option>
+		<option value="2016"> 2016</option>
+    	<option value="2017"> 2017</option>
+    	<option value="2018"> 2018 </option>
+    	<option value="2019"> 2019 </option>
+</select>
+   
+</div>
+<br><br>
+
+<div style="background-color: #eee;width: 380px" >AREA OF INTEREST :
+&nbsp
+<select id="int">
+
+	<option value="Education">Education</option>
+	<option value="Tourism"> Tourism</option>
+	<option value="Medical"> Medical</option>
+	<option value="Teacher"> Teacher </option>
+</select>
+   
+
+</div>
+
+<br><br><br>
+<span>WANTS TO BE:</span><br><br>
+<div   >
+<input type="radio" value="front"  name="prof"  > FRONT END<br><br>
+<input type="radio" value="END"  name="prof"> BACK END<br><br>
+<input type="radio" value="BOTH"  name="prof"> BOTH<br><br>
+<input type="radio" value="NONE"  name="prof"> NONE<br><br>
+</div>
+
+<button type="submit" style="border-radius: 5px; background-color:#1e88e5; border: none;width: 85px;height: 35px" >  submit </button><br><br>
+
+</form>
+</center>
+
+</center>
+<script src="https://www.gstatic.com/firebasejs/5.5.4/firebase.js"></script>
+<script>
+	
+
+var config = {
+    apiKey: "AIzaSyBRTTdqAzsnpDxpPVGSRL__NgURrBCZe8c",
+    authDomain: "my-project2-ccae0.firebaseapp.com",
+    databaseURL: "https://my-project2-ccae0.firebaseio.com",
+    projectId: "my-project2-ccae0",
+    storageBucket: "my-project2-ccae0.appspot.com",
+    messagingSenderId: "277809443589"
+  };
+  firebase.initializeApp(config);
+
+  var messagesRef = firebase.database().ref('messages');
+
+document.getElementById('contactForm').addEventListener('submit',submitForm);
+function submitForm(e){
+e.preventDefault();
+var name = document.getElementById('fname').value;
+var lname = document.getElementById('lname').value;
+var email = document.getElementById('email').value;
+
+
+var country = document.getElementById('country').value;
+var gender = document.querySelector("input[name=gender]:checked").value;
+var year = document.getElementById('year').value;
+var int = document.getElementById('int').value;
+var prof = document.querySelector("input[name=prof]:checked").value;	
+
+
+
+// console.log(name);
+// console.log(lname);
+// console.log(email);
+// console.log(country);
+// console.log(gender);
+// console.log(year);
+// console.log(int);
+// console.log(prof);
+
+
+ savedata(name,lname,email,country,gender,int,year,prof);
+}
+function savedata(fname,lname,email,country,gender,int,year,prof){
+var newMessageRef = messagesRef.push();
+newMessageRef.set({
+fname: fname,
+lname: lname,
+email:email,
+country:country,
+int:int,
+year:year,
+gender:gender,
+prof:prof
+
+});
+}
+
+</script>
+</body>
+</html>
